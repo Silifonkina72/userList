@@ -2,7 +2,7 @@ import { TableCell, TableRow } from "@mui/material";
 import { OneUserSortProps } from "../types/SortUserList";
 import React, { memo } from 'react'
 
-const OneUserSort = memo(({ user }: OneUserSortProps) => {
+const OneUser = memo(({ user }: OneUserSortProps) => {
   return (
     <>
       <TableRow
@@ -21,4 +21,4 @@ const OneUserSort = memo(({ user }: OneUserSortProps) => {
     </>
   );
 })
-export default OneUserSort;
+export default OneUser;

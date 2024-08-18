@@ -1,27 +1,29 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Select,
+  MenuItem,
+  TextField,
+  Button,
+} from "@mui/material";
+import OneUser from "./OneUser";
+import { User } from "../types/SortUserList";
+import MyModal from "./Modal";
+import { MyButton } from "./MyButton";
 
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, TextField, Button, Modal, Box } from '@mui/material';
-import OneUserSort from '../components/OneUserSort';
-import { User } from '../types/SortUserList';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 export function FilterUserList() {
   const [users, setUsers] = useState<User[]>([]);
-  const [filterCategory, setFilterCategory] = useState<keyof User>('name');
-  const [filterValue, setFilterValue] = useState<string>('');
+  const [filterCategory, setFilterCategory] = useState<keyof User>("name");
+  const [filterValue, setFilterValue] = useState<string>("");
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [showTable, setShowTable] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -44,18 +46,27 @@ export function FilterUserList() {
     setFilterCategory(event?.target.value as keyof User);
   };
 
-  const handleFilterValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilterValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setFilterValue(event?.target.value);
   };
 
   const applyFilter = () => {
-    const filtered = users.filter(user => {
-      if (filterCategory === 'address') {
-        return user.address.city.toLowerCase().includes(filterValue.toLowerCase());
-      } else if (filterCategory === 'company') {
-        return user.company.name.toLowerCase().includes(filterValue.toLowerCase());
+    const filtered = users.filter((user) => {
+      if (filterCategory === "address") {
+        return user.address.city
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
+      } else if (filterCategory === "company") {
+        return user.company.name
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
       } else {
-        return user[filterCategory].toString().toLowerCase().includes(filterValue.toLowerCase());
+        return user[filterCategory]
+          .toString()
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
       }
     });
     if (filtered.length === 0) {
@@ -65,8 +76,12 @@ export function FilterUserList() {
       setFilteredUsers(filtered);
       setShowTable(true);
     }
-    setFilterValue('');
+    setFilterValue("");
   };
+
+  const handleClose = () => {
+    setShowModal(false)
+  }
 
   return (
     <>
@@ -75,7 +90,7 @@ export function FilterUserList() {
           value={filterCategory}
           onChange={handleFilterChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Filter by category' }}
+          inputProps={{ "aria-label": "Filter by category" }}
         >
           <MenuItem value="name">Name</MenuItem>
           <MenuItem value="email">Email</MenuItem>
@@ -87,23 +102,18 @@ export function FilterUserList() {
           onChange={handleFilterValueChange}
           placeholder="Filter value"
         />
-        <Button onClick={applyFilter} variant="contained" disabled={filterValue.trim() === ''}>Filter</Button>
+        <MyButton  applyFilter={applyFilter} filterValue={filterValue}/>
+        {/* <Button
+          onClick={applyFilter}
+          variant="contained"
+          disabled={filterValue.trim() === ""}
+        >
+          Filter
+        </Button> */}
       </div>
 
-      <Modal
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <h2 id="modal-modal-title">Ошибка фильтрации</h2>
-          <p id="modal-modal-description">
-            Нет результатов, соответствующих вашему запросу. Пожалуйста, попробуйте еще раз.
-          </p>
-          <Button onClick={()=>setShowModal(false)}>close</Button>
-        </Box>
-      </Modal>
+      {showModal && <MyModal open={showModal} onClose={handleClose} />}
+
 
       {showTable && (
         <TableContainer component={Paper}>
@@ -118,7 +128,7 @@ export function FilterUserList() {
             </TableHead>
             <TableBody>
               {filteredUsers.map((user) => (
-                <OneUserSort key={user.id} user={user} />
+                <OneUser key={user.id} user={user} />
               ))}
             </TableBody>
           </Table>

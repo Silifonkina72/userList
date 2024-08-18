@@ -27,3 +27,13 @@ export interface User {
   export interface OneUserSortProps {
     user: User;
   }
+
+  export interface MyButtonProps {
+    applyFilter: () => void;
+    filterValue: string;
+}
+
+export interface MyModalProps {
+  open: boolean;
+  onClose: () => void;
+}

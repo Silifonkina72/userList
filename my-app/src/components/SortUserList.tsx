@@ -8,9 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import OneUserSort from "./OneUserSort";
+import OneUser from "./OneUser";
 import { Order, User } from "../types/SortUserList";
-
 
 export function SortUserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -111,10 +110,9 @@ export function SortUserList() {
             </TableRow>
           </TableHead>
 
-
           <TableBody>
-          {sortedUsers.map((user) => (
-              <OneUserSort key={user.id} user={user} />
+            {sortedUsers.map((user) => (
+              <OneUser key={user.id} user={user} />
             ))}
           </TableBody>
         </Table>
@@ -122,5 +120,3 @@ export function SortUserList() {
     </>
   );
 }
-
-
