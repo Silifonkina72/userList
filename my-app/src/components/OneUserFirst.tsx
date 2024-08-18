@@ -3,7 +3,7 @@ import { OneUserSortProps } from "../types/SortUserList";
 import React, { memo } from 'react'
 import '../styles/scss/oneUser.scss'
 
-const OneUser = memo(({ user }: OneUserSortProps) => {
+const OneUserFirst = memo(({ user }: OneUserSortProps) => {
   return (
     <>
       
@@ -18,15 +18,10 @@ const OneUser = memo(({ user }: OneUserSortProps) => {
   <TableCell align="center" className="user-one-table__cell">
     {user.email}
   </TableCell>
-  <TableCell align="center" className="user-one-table__cell user-one-table__cell--address">
-  <span className="user-one-table__highlight"> City:</span>  {user.address.city}, <br></br><span className="user-one-table__highlight">zipcode:</span> {user.address.zipcode}
-  </TableCell>
-  <TableCell align="center" className="user-one-table__cell">
-    {user.company.name}
-  </TableCell>
+  
 </TableRow>
 
     </>
   );
 })
-export default OneUser;
+export default OneUserFirst;

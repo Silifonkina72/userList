@@ -11,11 +11,12 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import OneUser from "./OneUser";
 import { Order, User } from "../types/SortUserList";
 import '../styles/scss/sortUserList.scss';
+import OneUserFirst from "./OneUserFirst";
 
 
 
 
-export function SortUserList() {
+export function SortAdaptivFirst() {
   const [users, setUsers] = useState<User[]>([]);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof User>("name");
@@ -97,32 +98,12 @@ export function SortUserList() {
               email
             </TableSortLabel>
           </TableCell>
-          <TableCell align="center" className="user-table__cell">
-            <TableSortLabel
-              active={orderBy === "address"}
-              direction={orderBy === "address" ? order : "asc"}
-              onClick={(event) => handleRequestSort(event, "address")}
-              className="user-table__sort-label"
-            >
-              аддресс
-            </TableSortLabel>
-          </TableCell>
-          <TableCell align="center" className="user-table__cell">
-            <TableSortLabel
-              active={orderBy === "company"}
-              direction={orderBy === "company" ? order : "asc"}
-              onClick={(event) => handleRequestSort(event, "company")}
-              className="user-table__sort-label"
-            >
-              компания
-            </TableSortLabel>
-          </TableCell>
         </TableRow>
       </TableHead>
 
       <TableBody className="user-table__body">
         {sortedUsers.map((user: User) => (
-          <OneUser key={user.id} user={user} />
+          <OneUserFirst key={user.id} user={user} />
         ))}
       </TableBody>
     </Table>

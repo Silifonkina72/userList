@@ -15,4 +15,5 @@
   &__button {
     @include user-filter-button($head-color, $text-color-head, $hover-color);
   }
+
 }

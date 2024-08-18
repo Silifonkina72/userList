@@ -11,11 +11,12 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import OneUser from "./OneUser";
 import { Order, User } from "../types/SortUserList";
 import '../styles/scss/sortUserList.scss';
+import OneUserLast from "./OneUserLast";
 
 
 
 
-export function SortUserList() {
+export function SortUserAdaptiv() {
   const [users, setUsers] = useState<User[]>([]);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof User>("name");
@@ -71,32 +72,12 @@ export function SortUserList() {
 
   return (
     <>
-    <div className="user-table-description">Перед вами представлена таблица пользователей с возможностью сортировки по ФИО, email, аддрессу и компании</div>
+   
 <div className="user-table">
   <TableContainer component={Paper} className="user-table__container">
     <Table  size="small" aria-label="a dense table" className="user-table__table">
       <TableHead className="user-table__head">
         <TableRow className="user-table__row">
-          <TableCell align="center" className="user-table__cell">
-            <TableSortLabel 
-              active={orderBy === "name"}
-              direction={orderBy === "name" ? order : "asc"}
-              onClick={(event) => handleRequestSort(event, "name")}
-              className="user-table__sort-label"
-            >
-              ФИО
-            </TableSortLabel>
-          </TableCell>
-          <TableCell align="center" className="user-table__cell">
-            <TableSortLabel
-              active={orderBy === "email"}
-              direction={orderBy === "email" ? order : "asc"}
-              onClick={(event) => handleRequestSort(event, "email")}
-              className="user-table__sort-label"
-            >
-              email
-            </TableSortLabel>
-          </TableCell>
           <TableCell align="center" className="user-table__cell">
             <TableSortLabel
               active={orderBy === "address"}
@@ -122,7 +103,7 @@ export function SortUserList() {
 
       <TableBody className="user-table__body">
         {sortedUsers.map((user: User) => (
-          <OneUser key={user.id} user={user} />
+          <OneUserLast key={user.id} user={user} />
         ))}
       </TableBody>
     </Table>

@@ -17,6 +17,7 @@ import { User } from "../types/SortUserList";
 import MyModal from "./Modal";
 import { MyButton } from "./MyButton";
 import "../styles/scss/filterUserList.scss";
+import '../styles/scss/oneUser.scss'
 
 export function FilterUserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -118,7 +119,6 @@ export function FilterUserList() {
       {showTable && (
         <TableContainer component={Paper} className="user-table__container">
           <Table
-            sx={{ minWidth: 650 }}
             size="small"
             aria-label="a dense table"
             className="user-table__table"
