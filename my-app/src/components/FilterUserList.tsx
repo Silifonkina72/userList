@@ -11,14 +11,12 @@ import {
   Select,
   MenuItem,
   TextField,
-  Button,
 } from "@mui/material";
 import OneUser from "./OneUser";
 import { User } from "../types/SortUserList";
 import MyModal from "./Modal";
 import { MyButton } from "./MyButton";
-
-
+import "../styles/scss/filterUserList.scss";
 
 export function FilterUserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -80,53 +78,68 @@ export function FilterUserList() {
   };
 
   const handleClose = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   return (
     <>
-      <div>
-        <Select
-          value={filterCategory}
-          onChange={handleFilterChange}
-          displayEmpty
-          inputProps={{ "aria-label": "Filter by category" }}
-        >
-          <MenuItem value="name">Name</MenuItem>
-          <MenuItem value="email">Email</MenuItem>
-          <MenuItem value="address">City</MenuItem>
-          <MenuItem value="company">Company</MenuItem>
-        </Select>
-        <TextField
-          value={filterValue}
-          onChange={handleFilterValueChange}
-          placeholder="Filter value"
-        />
-        <MyButton  applyFilter={applyFilter} filterValue={filterValue}/>
-        {/* <Button
-          onClick={applyFilter}
-          variant="contained"
-          disabled={filterValue.trim() === ""}
-        >
-          Filter
-        </Button> */}
+      <div className="user-filter">
+        <div className="user-filter__description">
+          Также вы можете воспользоваться фильтром, для поиска конкретного
+          пользователя
+        </div>
+        <div className="user-filter__controls">
+          <Select
+            value={filterCategory}
+            onChange={handleFilterChange}
+            displayEmpty
+            inputProps={{ "aria-label": "Filter by category" }}
+            className="user-filter__select"
+          >
+            <MenuItem value="name">Name</MenuItem>
+            <MenuItem value="email">Email</MenuItem>
+            <MenuItem value="address">City</MenuItem>
+            <MenuItem value="company">Company</MenuItem>
+          </Select>
+          
+          <TextField
+            value={filterValue}
+            onChange={handleFilterValueChange}
+            placeholder="Filter value"
+            className="user-filter__textfield"
+             InputProps={{ style: { height: 40 } }}
+          />
+          <MyButton applyFilter={applyFilter} filterValue={filterValue} />
+        </div>
       </div>
 
       {showModal && <MyModal open={showModal} onClose={handleClose} />}
 
-
       {showTable && (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">ФИО</TableCell>
-                <TableCell align="center">email</TableCell>
-                <TableCell align="center">аддрес</TableCell>
-                <TableCell align="center">компания</TableCell>
+        <TableContainer component={Paper} className="user-table__container">
+          <Table
+            sx={{ minWidth: 650 }}
+            size="small"
+            aria-label="a dense table"
+            className="user-table__table"
+          >
+            <TableHead className="user-table__head">
+              <TableRow className="user-table__row">
+                <TableCell align="center" className="user-table__cell">
+                  ФИО
+                </TableCell>
+                <TableCell align="center" className="user-table__cell">
+                  email
+                </TableCell>
+                <TableCell align="center" className="user-table__cell">
+                  аддрес
+                </TableCell>
+                <TableCell align="center" className="user-table__cell">
+                  компания
+                </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className="user-table__body">
               {filteredUsers.map((user) => (
                 <OneUser key={user.id} user={user} />
               ))}

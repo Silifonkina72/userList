@@ -1,0 +1,24 @@
+$row-background-color: rgb(192, 191, 192);
+$address-color: rgb(113, 11, 129);
+
+
+.user-one-table {
+  &__row {
+    &:hover {
+      background-color: $row-background-color;
+    }
+  }
+
+  &__cell {
+    text-align: center;
+
+    &--address {
+      font-style: italic;
+    }
+  }
+
+  &__highlight {
+    font-weight: bold;
+    color: $address-color;
+  }
+}

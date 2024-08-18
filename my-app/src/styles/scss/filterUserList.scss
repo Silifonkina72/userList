@@ -1,0 +1,58 @@
+@import "../scss/sortUserList";
+
+
+
+.user-filter {
+  margin: 30px;
+
+  &__description {
+    @include description-style(20px, #696868, 30px 50px);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  &__select {
+    min-width: 120px;
+    height: 40px;
+  }
+
+  &__textfield {
+    flex-grow: 0.3;
+    border: #696868 solid 1px;
+  }
+
+}
+
+.user-table {
+  &__container {
+    margin: 20px;
+    width: 1000px !important;
+    box-shadow: 3px 3px 16px grey !important;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__head {
+    background-color: $head-color;
+  }
+
+  &__row {
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+
+  &__cell {
+    @include sort-label-style(bold, $text-color-head);
+  }
+
+  &__body {
+    background-color: $background-color-body;
+  }
+}

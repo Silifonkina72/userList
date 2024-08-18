@@ -10,6 +10,10 @@ import Paper from "@mui/material/Paper";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import OneUser from "./OneUser";
 import { Order, User } from "../types/SortUserList";
+import '../styles/scss/sortUserList.scss';
+
+
+
 
 export function SortUserList() {
   const [users, setUsers] = useState<User[]>([]);
@@ -67,56 +71,64 @@ export function SortUserList() {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">
-                <TableSortLabel
-                  active={orderBy === "name"}
-                  direction={orderBy === "name" ? order : "asc"}
-                  onClick={(event) => handleRequestSort(event, "name")}
-                >
-                  ФИО
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="center">
-                <TableSortLabel
-                  active={orderBy === "email"}
-                  direction={orderBy === "email" ? order : "asc"}
-                  onClick={(event) => handleRequestSort(event, "email")}
-                >
-                  email
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="center">
-                <TableSortLabel
-                  active={orderBy === "address"}
-                  direction={orderBy === "address" ? order : "asc"}
-                  onClick={(event) => handleRequestSort(event, "address")}
-                >
-                  аддрес
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="center">
-                <TableSortLabel
-                  active={orderBy === "company"}
-                  direction={orderBy === "company" ? order : "asc"}
-                  onClick={(event) => handleRequestSort(event, "company")}
-                >
-                  компания
-                </TableSortLabel>
-              </TableCell>
-            </TableRow>
-          </TableHead>
+    <div className="user-table-description">Перед вами представлена таблица пользователей с возможностью сортировки по ФИО, email, аддрессу и компании</div>
+<div className="user-table">
+  <TableContainer component={Paper} className="user-table__container">
+    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" className="user-table__table">
+      <TableHead className="user-table__head">
+        <TableRow className="user-table__row">
+          <TableCell align="center" className="user-table__cell">
+            <TableSortLabel 
+              active={orderBy === "name"}
+              direction={orderBy === "name" ? order : "asc"}
+              onClick={(event) => handleRequestSort(event, "name")}
+              className="user-table__sort-label"
+            >
+              ФИО
+            </TableSortLabel>
+          </TableCell>
+          <TableCell align="center" className="user-table__cell">
+            <TableSortLabel
+              active={orderBy === "email"}
+              direction={orderBy === "email" ? order : "asc"}
+              onClick={(event) => handleRequestSort(event, "email")}
+              className="user-table__sort-label"
+            >
+              email
+            </TableSortLabel>
+          </TableCell>
+          <TableCell align="center" className="user-table__cell">
+            <TableSortLabel
+              active={orderBy === "address"}
+              direction={orderBy === "address" ? order : "asc"}
+              onClick={(event) => handleRequestSort(event, "address")}
+              className="user-table__sort-label"
+            >
+              аддресс
+            </TableSortLabel>
+          </TableCell>
+          <TableCell align="center" className="user-table__cell">
+            <TableSortLabel
+              active={orderBy === "company"}
+              direction={orderBy === "company" ? order : "asc"}
+              onClick={(event) => handleRequestSort(event, "company")}
+              className="user-table__sort-label"
+            >
+              компания
+            </TableSortLabel>
+          </TableCell>
+        </TableRow>
+      </TableHead>
 
-          <TableBody>
-            {sortedUsers.map((user) => (
-              <OneUser key={user.id} user={user} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <TableBody className="user-table__body">
+        {sortedUsers.map((user: User) => (
+          <OneUser key={user.id} user={user} />
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+</div>
+
     </>
   );
 }
