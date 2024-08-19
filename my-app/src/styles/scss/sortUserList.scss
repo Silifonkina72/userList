@@ -1,0 +1,95 @@
+$head-color: #54b9ad;
+$hover-color: #159c8b;
+$text-color-head: #ecf0f2;
+$background-color-body: #d6e0e6;
+
+@mixin description-style($font-size, $color, $margin) {
+  font-size: $font-size;
+  color: $color;
+  margin: $margin;
+}
+
+@mixin sort-label-style($font-weight, $color) {
+  font-weight: $font-weight;
+  color: $color !important;
+}
+
+.user-table-description {
+  @include description-style(20px, #696868, 30px 1vw);
+
+  @media (max-width: 1060px) {
+    @include description-style(1.2rem, #696868, 3vw 0.8vw);
+  }
+
+  @media (max-width: 768px) {
+    @include description-style(1.1rem, #696868, 2vw 0.5vw);
+  }
+
+  @media (max-width: 320px) {
+    @include description-style(0.9rem, #696868, 1vw 0.3vw);
+  }
+}
+
+.user-table {
+  &__container {
+    margin: 20px;
+    width: 1000px !important;
+    box-shadow: 3px 3px 16px grey !important;
+
+    @media (max-width: 1060px) {
+      margin: 1vw;
+      width: 95vw !important;
+    }
+
+    @media (max-width: 768px) {
+      margin: 0.8vw;
+      width: 95vw !important;
+    }
+
+    @media (max-width: 320px) {
+      margin: 0.5vw;
+      width: 95vw !important;
+    }
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__head {
+    background-color: $head-color;
+  }
+
+  &__row {
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+
+  &__cell {
+    text-align: center;
+  }
+
+  &__sort-label {
+    @include sort-label-style(bold, $text-color-head);
+    @media (max-width: 1060px) {
+      font-size: 0.8rem !important;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem !important;
+    }
+
+    @media (max-width: 660px) {
+      font-size: 0.75rem !important;
+    }
+
+    @media (max-width: 320px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__body {
+    background-color: $background-color-body;
+  }
+}

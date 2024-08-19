@@ -1,0 +1,39 @@
+$row-background-color: rgb(192, 191, 192);
+$address-color: rgb(113, 11, 129);
+
+.user-one-table {
+  &__row {
+    &:hover {
+      background-color: $row-background-color;
+    }
+  }
+
+  &__cell {
+    text-align: center;
+    @media (max-width: 1060px) {
+      font-size: 0.8rem !important;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem !important;
+    }
+
+    @media (max-width: 680px) {
+      font-size: 0.75rem !important;
+      padding: 6px 10px !important;
+    }
+
+    @media (max-width: 320px) {
+      font-size: 1.2rem;
+    }
+
+    &--address {
+      font-style: italic;
+    }
+  }
+
+  &__highlight {
+    font-weight: bold;
+    color: $address-color;
+  }
+}
