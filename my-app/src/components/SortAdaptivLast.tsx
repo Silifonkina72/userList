@@ -10,25 +10,27 @@ import Paper from "@mui/material/Paper";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { Order, User } from "../types/Types";
 import "../styles/scss/sortUserList.scss";
-import OneUserFirst from "./OneUserFirst";
+import OneUserLast from "./OneUserLast";
+import { ButtonUpdate } from "./ButtonUpdate";
 
-export function SortAdaptivFirst(): JSX.Element {
+export function SortAdaptivLast(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof User>("name");
 
+  const fetchUsers: () => Promise<void> = async () => {
+    try {
+      const response = await axios.get<User[]>(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      setUsers(response.data);
+    } catch (error) {
+      console.log("error ", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get<User[]>(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        setUsers(response.data);
-      } catch (error) {
-        console.log("error ", error);
-      }
-    };
-    fetchUser();
+    fetchUsers();
   }, []);
 
   const handleRequestSort = (
@@ -68,10 +70,6 @@ export function SortAdaptivFirst(): JSX.Element {
 
   return (
     <>
-      <div className="user-table-description">
-        Перед вами представлена таблица пользователей с возможностью сортировки
-        по ФИО, email, аддрессу и компании
-      </div>
       <div className="user-table">
         <TableContainer component={Paper} className="user-table__container">
           <Table
@@ -83,22 +81,22 @@ export function SortAdaptivFirst(): JSX.Element {
               <TableRow className="user-table__row">
                 <TableCell align="center" className="user-table__cell">
                   <TableSortLabel
-                    active={orderBy === "name"}
-                    direction={orderBy === "name" ? order : "asc"}
-                    onClick={(event) => handleRequestSort(event, "name")}
+                    active={orderBy === "address"}
+                    direction={orderBy === "address" ? order : "asc"}
+                    onClick={(event) => handleRequestSort(event, "address")}
                     className="user-table__sort-label"
                   >
-                    ФИО
+                    аддресс
                   </TableSortLabel>
                 </TableCell>
                 <TableCell align="center" className="user-table__cell">
                   <TableSortLabel
-                    active={orderBy === "email"}
-                    direction={orderBy === "email" ? order : "asc"}
-                    onClick={(event) => handleRequestSort(event, "email")}
+                    active={orderBy === "company"}
+                    direction={orderBy === "company" ? order : "asc"}
+                    onClick={(event) => handleRequestSort(event, "company")}
                     className="user-table__sort-label"
                   >
-                    email
+                    компания
                   </TableSortLabel>
                 </TableCell>
               </TableRow>
@@ -106,11 +104,12 @@ export function SortAdaptivFirst(): JSX.Element {
 
             <TableBody className="user-table__body">
               {sortedUsers.map((user: User) => (
-                <OneUserFirst key={user.id} user={user} />
+                <OneUserLast key={user.id} user={user} />
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        <ButtonUpdate fetchUsers={fetchUsers} />
       </div>
     </>
   );

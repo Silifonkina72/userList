@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { SortUserList } from "./components/SortUserList";
 import { FilterUserList } from "./components/FilterUserList";
-
 import { Adaptiv } from "./components/Adaptiv";
 
 function App() {

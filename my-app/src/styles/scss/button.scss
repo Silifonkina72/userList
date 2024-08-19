@@ -1,7 +1,5 @@
 @import "../scss/sortUserList";
 
-
-
 @mixin user-filter-button($background-color, $text-color, $hover-color) {
   background-color: $background-color !important;
   color: $text-color !important;
@@ -15,5 +13,8 @@
   &__button {
     @include user-filter-button($head-color, $text-color-head, $hover-color);
   }
+}
 
+.user-update {
+  @include user-filter-button($head-color, $text-color-head, $hover-color);
 }

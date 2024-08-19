@@ -13,13 +13,13 @@ import {
   TextField,
 } from "@mui/material";
 import OneUser from "./OneUser";
-import { User } from "../types/SortUserList";
+import { User } from "../types/Types";
 import MyModal from "./Modal";
 import { MyButton } from "./MyButton";
 import "../styles/scss/filterUserList.scss";
-import '../styles/scss/oneUser.scss'
+import "../styles/scss/oneUser.scss";
 
-export function FilterUserList() {
+export function FilterUserList(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
   const [filterCategory, setFilterCategory] = useState<keyof User>("name");
   const [filterValue, setFilterValue] = useState<string>("");
@@ -52,7 +52,7 @@ export function FilterUserList() {
   };
 
   const applyFilter = () => {
-    const filtered = users.filter((user) => {
+    const filtered = users.filter((user: User) => {
       if (filterCategory === "address") {
         return user.address.city
           .toLowerCase()
@@ -102,13 +102,12 @@ export function FilterUserList() {
             <MenuItem value="address">City</MenuItem>
             <MenuItem value="company">Company</MenuItem>
           </Select>
-          
           <TextField
             value={filterValue}
             onChange={handleFilterValueChange}
             placeholder="Filter value"
             className="user-filter__textfield"
-             InputProps={{ style: { height: 40 } }}
+            InputProps={{ style: { height: 40 } }}
           />
           <MyButton applyFilter={applyFilter} filterValue={filterValue} />
         </div>
@@ -140,7 +139,7 @@ export function FilterUserList() {
               </TableRow>
             </TableHead>
             <TableBody className="user-table__body">
-              {filteredUsers.map((user) => (
+              {filteredUsers.map((user: User) => (
                 <OneUser key={user.id} user={user} />
               ))}
             </TableBody>

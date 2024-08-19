@@ -1,6 +1,6 @@
 import React from 'react'
 import { SortAdaptivFirst } from './SortAdaptivFirst'
-import { SortUserAdaptiv } from './SortUserAdaptiv'
+import { SortAdaptivLast } from './SortAdaptivLast'
 
 export function Adaptiv() {
     
@@ -8,7 +8,7 @@ export function Adaptiv() {
     return (
         <>
            <SortAdaptivFirst />
-           <SortUserAdaptiv />
+           <SortAdaptivLast />
         </>
     )
 }
